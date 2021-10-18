@@ -3,8 +3,8 @@ import yaml
 import random 
 import PIL
 
-import augmentations
-import augment_util
+import augmentations.augmentations
+import augmentations.augment_util
 
 def _getTrainingConfig(training_directory : str, config_filename : str):
   if not config_filename.endswith('.yaml'):
