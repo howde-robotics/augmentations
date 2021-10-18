@@ -3,8 +3,8 @@ import yaml
 import random 
 import PIL
 
-import augmentations.augmentations
-import augmentations.augment_util
+from augmentations.augmentations import augment_random_erase, augment_rotate_90
+from augmentations.augment_util import findRelevantTrainingEx, findTargetDatasets
 
 def _getTrainingConfig(training_directory : str, config_filename : str):
   if not config_filename.endswith('.yaml'):
@@ -38,7 +38,7 @@ def applySingleAugmentation(apply_to, augment_func, augment_type, augment_copy,
         to_augment = original_name_list[:num_to_augment]
 
         for name in to_augment:
-            orig_img_file, orig_annotation_file = augment_util.findRelevantTrainingEx(original_training_list, name)
+            orig_img_file, orig_annotation_file = findRelevantTrainingEx(original_training_list, name)
             orig_img_path = os.path.join(training_dir, orig_img_file)
             orig_annotation_path = os.path.join(training_dir, orig_annotation_file)
 
@@ -73,12 +73,12 @@ def applyAugmentations(config, local_storage_dir, local_dsets_list):
         augment_args = target_augment['args']
         augment_kwargs = target_augment['kwargs']
 
-        apply_to = augment_util.findTargetDatasets(target_augment, local_storage_dir, local_dsets_list)
+        apply_to = findTargetDatasets(target_augment, local_storage_dir, local_dsets_list)
 
         if augment_type == 'random_erase':
-            augment_func = augmentations.augment_random_erase
+            augment_func = augment_random_erase
         elif augment_type == 'rotate_90':
-            augment_func = augmentations.augment_rotate_90
+            augment_func = augment_rotate_90
         else:
             raise NotImplementedError(f'Augmentation type \'{augment_type}\' not supported')
 
