@@ -42,8 +42,9 @@ def applySingleAugmentation(apply_to, augment_func, augment_type, augment_copy,
             orig_img_path = os.path.join(training_dir, orig_img_file)
             orig_annotation_path = os.path.join(training_dir, orig_annotation_file)
 
-            #apply augmentation
-            pil_img, annotation_list = augment_func(orig_img_path, orig_annotation_path)
+            #apply augmentation and forward arguments
+            pil_img, annotation_list = augment_func(orig_img_path, orig_annotation_path, 
+                                                    *augment_args, **augment_kwargs)
 
             #save augmentation
             new_img_path = os.path.join(training_dir, f'{augment_type}_{orig_img_file}')

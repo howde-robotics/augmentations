@@ -75,6 +75,7 @@ def augment_random_erase(img_path, annotation_path, mode = 'image_object', s_l =
     if 'image' in mode:
         tl, br = _selectRandomRectangleSubregion(pil_img.width, pil_img.height, s_l, s_h/4, r_1)
         pil_img = _addNoisyRectangle(pil_img, tl, br)
+    
     if 'object' in mode:
         for bbox in orig_bboxes:
             _, x_cen_rel, y_cen_rel, w_rel, h_rel = bbox
