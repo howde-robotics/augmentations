@@ -63,6 +63,8 @@ def applySingleAugmentation(apply_to, augment_func, augment_type, augment_copy,
 def applyAugmentations(config, local_storage_dir, local_dsets_list):
     augments_to_apply = config['augmentations']
 
+    print(__name__)
+
     # target_augment = augments_to_apply[0]
     for target_augment in augments_to_apply:
         augment_type = target_augment['type']
