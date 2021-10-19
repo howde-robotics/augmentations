@@ -3,10 +3,10 @@ import yaml
 import random 
 import PIL
 
-# from augmentations.augmentations import augment_random_erase, augment_rotate_90
-# from augmentations.augment_util import findRelevantTrainingEx, findTargetDatasets
-from augmentations import augment_random_erase, augment_rotate_90
-from augment_util import findRelevantTrainingEx, findTargetDatasets
+from augmentations.augmentations import augment_random_erase, augment_rotate_90
+from augmentations.augment_util import findRelevantTrainingEx, findTargetDatasets
+# from augmentations import augment_random_erase, augment_rotate_90
+# from augment_util import findRelevantTrainingEx, findTargetDatasets
 
 def _getTrainingConfig(training_directory : str, config_filename : str):
   if not config_filename.endswith('.yaml'):

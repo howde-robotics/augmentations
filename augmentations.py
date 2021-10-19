@@ -2,10 +2,10 @@ import random
 
 from PIL import Image, ImageEnhance
 
-# from augmentations.augment_util import readAnnotation, display_boxes_from_img_and_list
-# from augmentations.augment_util import _addNoisyRectangle, _selectRandomRectangleSubregion
-from augment_util import readAnnotation, display_boxes_from_img_and_list
-from augment_util import _addNoisyRectangle, _selectRandomRectangleSubregion
+from augmentations.augment_util import readAnnotation, display_boxes_from_img_and_list
+from augmentations.augment_util import _addNoisyRectangle, _selectRandomRectangleSubregion
+# from augment_util import readAnnotation, display_boxes_from_img_and_list
+# from augment_util import _addNoisyRectangle, _selectRandomRectangleSubregion
 
 
 
