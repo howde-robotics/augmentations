@@ -2,8 +2,10 @@ import random
 
 from PIL import Image, ImageEnhance
 
-from augmentations.augment_util import readAnnotation, display_boxes_from_img_and_list
-from augmentations.augment_util import _addNoisyRectangle, _selectRandomRectangleSubregion
+# from augmentations.augment_util import readAnnotation, display_boxes_from_img_and_list
+# from augmentations.augment_util import _addNoisyRectangle, _selectRandomRectangleSubregion
+from augment_util import readAnnotation, display_boxes_from_img_and_list
+from augment_util import _addNoisyRectangle, _selectRandomRectangleSubregion
 
 
 
@@ -83,6 +85,11 @@ def augment_random_erase(img_path, annotation_path, mode = 'image_object', s_l =
             y_cen = int(y_cen_rel * pil_img.height)
             w_bbox = int(w_rel * pil_img.width)
             h_bbox = int(h_rel * pil_img.height)
+
+            #don't need to random erase really tiny bboxes
+            if w_bbox * h_bbox < 200:
+                continue
+
             tl_rel, br_rel = _selectRandomRectangleSubregion(w_bbox, h_bbox, s_l, s_h, r_1)
 
             tl = (int(tl_rel[0] - w_bbox/2 + x_cen), int(tl_rel[1] - h_bbox/2 + y_cen)) 
