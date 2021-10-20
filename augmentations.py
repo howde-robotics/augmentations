@@ -90,7 +90,10 @@ def augment_random_erase(img_path, annotation_path, mode = 'image_object', s_l =
             if w_bbox * h_bbox < 200:
                 continue
 
-            tl_rel, br_rel = _selectRandomRectangleSubregion(w_bbox, h_bbox, s_l, s_h, r_1)
+            try:
+                tl_rel, br_rel = _selectRandomRectangleSubregion(w_bbox, h_bbox, s_l, s_h, r_1)
+            except Exception as _:
+                continue
 
             tl = (int(tl_rel[0] - w_bbox/2 + x_cen), int(tl_rel[1] - h_bbox/2 + y_cen)) 
             br = (int(br_rel[0] - w_bbox/2 + x_cen), int(br_rel[1] - h_bbox/2 + y_cen)) 

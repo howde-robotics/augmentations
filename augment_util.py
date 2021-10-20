@@ -104,13 +104,19 @@ def _selectRandomRectangleSubregion(width, height, s_l, s_h, r_1):
         y_e = random.randint(0,height)
         if x_e + W_e <= width and y_e + H_e <= height:
             return (x_e, y_e), (x_e + W_e, y_e + H_e) 
+    
+    raise Exception("Couldn't find an internal rectangle")
 
 
 def _addNoisyRectangle(pil_img, tl, br):
-    noise_array = np.random.randint(low=0, high = 255, size= (br[1]-tl[1], br[0]-tl[0]) )
-    grayscale_noise = np.dstack([noise_array]*3)
+    noise_array_1c = np.random.randint(low=0, high = 255, size= (br[1]-tl[1], br[0]-tl[0]) )
+    noise_array_3c = np.dstack([noise_array_1c]*3)
     img_array = np.array(pil_img)
 
-    img_array[tl[1]:br[1], tl[0]:br[0],:] = grayscale_noise
+    if img_array.squeeze().ndim == 2:
+        img_array[tl[1]:br[1], tl[0]:br[0]] = noise_array_1c
+    else:
+        img_array[tl[1]:br[1], tl[0]:br[0],:] = noise_array_3c
+
     pil_img = Image.fromarray(img_array)
     return pil_img
