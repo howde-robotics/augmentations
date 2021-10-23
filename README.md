@@ -1,6 +1,8 @@
 # augmentations
 
-Augmentations are included in the `config.yaml` file that is stored with the zipped data sets. This file also includes the hyperparameters for the network training. This doc will just be talking about the augmentations part of that config file, the functionality of which are located in this repo.
+Augmentation configurations are included in the `<config name>.yaml` file that is stored with the zipped data sets. The file also includes the hyperparameters for the network training. This doc will just be talking about the augmentations part of that config file, the functionality of which are located in this repo.
+
+This repo is automatically pulled into Colab during training, so you don't need to manually call the library. It happens [here](https://colab.research.google.com/drive/122BR4FL1Cl8yFvCrsh2JnZhuNDLcrYiO?authuser=1#scrollTo=hfp3N6vTpd0j) in the training code. If you want to modify/add to the functionality, see below
 
 ## Strucure
 
@@ -62,7 +64,7 @@ After a single augmentation is applied, the augmented images are returned to the
 To write your own augmentation, just add it to this repo in the [right file](./augmentations.py). It should have the following functional interface:
 
 ```python
-def augment_my_new_augmentation(img_path, annotation_path):
+def augment_my_new_augmentation(img_path, annotation_path, <Additional arguments with defaults>):
 '''
 arg img_path: String path to the image to augment
 arg annotation_path: String path to the annoation text file associated with this image
@@ -83,6 +85,8 @@ returns: (pil_img, bboxes)
   
   return pil_img, bboxes
 ```
+
+If you give the new function extra arguments, make sure you give them default values.
 
 In order to make your new augmentation accessible through the config file, add a flag to it in the [appropriate spot](./augment.py#L80). The string selected here will be used to identify your augmentation in the `config.yaml` file. Be sure to add th appropriate import statement [at the top](./augment.py#L6) (because I can't fucking figure out how to get python packages to work properly ):
 
