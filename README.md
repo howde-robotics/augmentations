@@ -17,7 +17,7 @@ augmentations:
   - <Augmentation #2>
 ```
 
-Each augmentation is an dictionary element of this list and had 5 mandatry keys:
+Each augmentation is an dictionary element of this list and had 6 mandatry keys:
 
 1. `type`: This string specifies which augmentation is to be applied. The currenly available ones are `ranndom_erase` and `rotate_90`, wich are described below
 
@@ -25,11 +25,29 @@ Each augmentation is an dictionary element of this list and had 5 mandatry keys:
 
 3. `copy`: This specifies if the original images are deleted or kept once an augmentation has been applied. `True` will keep the originals, `False` will delete them.
 
+4. `probability`: This float specifies the probability this augmentation will apply to any given image in the dataset, sampled without replacement *for only this augmentation*. Once an augmentation has been fully applied, all augmented images are aded back to the temporarily stored dataset in Colab. Thus, augmentations specified in this configuration file compound (more below)
+
 4. `args`: This is a list of in-order arguments that will be forwarded to this augmentation function. `[]` will forward none
 
 5. `kwargs`: This is a dict of keyword arguments that will be forwarded to this augmentation function. `{}` will forward none
 
 ## Current augmentations
+
+There are currently two augmentations, but making new ones is easy (see below).
+
+### `rotate_90`
+
+The image is rotate clockwise or counter-clockwise 90 degrees (with equal probability). I would put an image here but you know exactly what that means.
+
+### `random_erase`
+
+A rectangular region within the image is deleted and filled with grayscale random noise. See [this paper](https://arxiv.org/abs/1708.04896) for specifics about the algorithm. There are several parameters for this function, most of which specify the qualities of the erased region. The most important parameter is the `mode`. There are three modes of random erase:
+
+- `image`: A single random region in the image is selected and erased. This region is selected irrespective of the objects in the image.
+- `object`: For each bounding box in the image, a region is selected and erased.
+- `image-object`: Both `image` and `object` level erasure are applied to the same image.
+
+
 
 ## Order and compounding
 
