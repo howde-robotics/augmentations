@@ -3,7 +3,7 @@ import yaml
 import random 
 import PIL
 
-from augmentations.augmentations import augment_random_erase, augment_rotate_90
+from augmentations.augmentations import augment_random_erase, augment_rotate_90, augment_horizontal_flip
 from augmentations.augment_util import findRelevantTrainingEx, findTargetDatasets
 # from augmentations import augment_random_erase, augment_rotate_90, augment_horizontal_flip
 # from augment_util import findRelevantTrainingEx, findTargetDatasets
