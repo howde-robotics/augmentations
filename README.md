@@ -21,7 +21,7 @@ augmentations:
 
 Each augmentation is an dictionary element of this list and had 6 mandatory keys:
 
-1. `type`: This string specifies which augmentation is to be applied. The currenly available ones are `ranndom_erase` and `rotate_90`, wich are described below
+1. `type`: This string specifies which augmentation is to be applied. The currenly available ones are described below
 
 2. `target_datasets`: This specifies to which datasets this augmentation will apply to. **An empty list will apply the augmentation to all datasets**. The datasets should match those named in the `config.yaml` files `datasets` list. The extensions for the datasets are optional (i.e. `rgb_data.7z` and `rgb_data` will both apply augmentations to the same dataset).
 
@@ -35,7 +35,11 @@ Each augmentation is an dictionary element of this list and had 6 mandatory keys
 
 ## Current augmentations
 
-There are currently two augmentations, but making new ones is easy (see below).
+There are currently three augmentations, but making new ones is easy (see below).
+
+### `horizontal_flip`
+
+The image is flipped horizontally.
 
 ### `rotate_90`
 
