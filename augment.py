@@ -5,7 +5,7 @@ import PIL
 
 from augmentations.augmentations import augment_random_erase, augment_rotate_90
 from augmentations.augment_util import findRelevantTrainingEx, findTargetDatasets
-# from augmentations import augment_random_erase, augment_rotate_90
+# from augmentations import augment_random_erase, augment_rotate_90, augment_horizontal_flip
 # from augment_util import findRelevantTrainingEx, findTargetDatasets
 
 def _getTrainingConfig(training_directory : str, config_filename : str):
@@ -81,6 +81,8 @@ def applyAugmentations(config, local_storage_dir, local_dsets_list):
             augment_func = augment_random_erase
         elif augment_type == 'rotate_90':
             augment_func = augment_rotate_90
+        elif augment_type == 'horizontal_flip':
+            augment_func = augment_horizontal_flip
         else:
             raise NotImplementedError(f'Augmentation type \'{augment_type}\' not supported')
 

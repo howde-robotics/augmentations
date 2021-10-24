@@ -102,9 +102,19 @@ def augment_random_erase(img_path, annotation_path, mode = 'image_object', s_l =
     
     return pil_img, orig_bboxes
 
+def augment_horizontal_flip(img_path, annotation_path):
+    pil_img = Image.open(img_path)
+    orig_bboxes = readAnnotation(annotation_path)
+
+    flipped_img = pil_img.transpose(Image.FLIP_LEFT_RIGHT)
+    new_bboxes = []
+    for cid, x, y, w, h in orig_bboxes:
+        new_bboxes.append([cid, (1-x), y, w, h])
+    return flipped_img, new_bboxes
+
 def main():
-    img_path = './big_ol_fake/train/random_erase_rotate_90_scene_1_01830.jpg'
-    anno_path = './big_ol_fake/train/random_erase_rotate_90_scene_1_01830.txt'
+    img_path = 'thermal_indoor_playground_small/train/horizontal_flip_scene_1_01830.jpg'
+    anno_path = 'thermal_indoor_playground_small/train/horizontal_flip_scene_1_01830.txt'
 
     pil_img = Image.open(img_path)
     bboxes = readAnnotation(anno_path)
